@@ -16,34 +16,34 @@ pipeline {
 
         stage('Build Jar') {
             steps {
-                bat 'mvn clean package -DskipTests'
+                sh 'mvn clean package -DskipTests'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t %IMAGE_NAME%:%IMAGE_TAG% .'
+                sh 'docker build -t %IMAGE_NAME%:%IMAGE_TAG% .'
             }
         }
 
         stage('Load Image into Minikube') {
             steps {
-                bat 'minikube image load %IMAGE_NAME%:%IMAGE_TAG%'
+                sh 'minikube image load %IMAGE_NAME%:%IMAGE_TAG%'
             }
         }
 
         stage('Deploy to Kubernetes') {
             steps {
-                bat 'kubectl apply -f deployment.yaml'
-                bat 'kubectl apply -f service.yaml'
+                sh 'kubectl apply -f deployment.yaml'
+                sh 'kubectl apply -f service.yaml'
             }
         }
 
         stage('Verify Deployment') {
             steps {
-                bat 'kubectl get deployments'
-                bat 'kubectl get pods'
-                bat 'kubectl get svc'
+                sh 'kubectl get deployments'
+                sh 'kubectl get pods'
+                sh 'kubectl get svc'
             }
         }
     }
