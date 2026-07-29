@@ -53,7 +53,7 @@ pipeline {
 		stage('Verify Deployment') {
 		    steps {
 				bat 'kubectl rollout status deployment/hello-deployment'
-				 bat "kubectl set image deployment/hello-deployment hello-deployment=%IMAGE_NAME%:%IMAGE_TAG%"
+				 bat "kubectl set image deployment/hello-deployment hello-container=%IMAGE_NAME%:%IMAGE_TAG%"
 		        bat 'kubectl get pods'
 		        bat 'kubectl get svc'
 		    }
