@@ -11,7 +11,7 @@ public class HelloController {
 	@GetMapping("/")
 	public String home()
 	{
-		return "Hello from Docker & Kubernetes";
+		return "Hello from Docker & Kubernetes with jenkins";
 	}
 	
 	@GetMapping("/time")
