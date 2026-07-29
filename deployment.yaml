@@ -5,7 +5,7 @@ metadata:
   name: hello-deployment
 
 spec:
-  replicas: 5
+  replicas: 4
 
   selector:
     matchLabels:
