@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = "hello-k8s"
-        IMAGE_TAG = "${BUILD_NUMBER}"
+        IMAGE_TAG = "v${BUILD_NUMBER}"
     }
     
      tools {
@@ -53,6 +53,7 @@ pipeline {
 		stage('Verify Deployment') {
 		    steps {
 				bat 'kubectl rollout status deployment/hello-deployment'
+				 bat "kubectl set image deployment/hello-deployment hello-deployment=%IMAGE_NAME%:%IMAGE_TAG%"
 		        bat 'kubectl get pods'
 		        bat 'kubectl get svc'
 		    }
