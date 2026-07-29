@@ -8,6 +8,7 @@ pipeline {
     
      tools {
         maven 'Maven3'
+        jdk 'jdk21'
     }
 
     stages {
@@ -23,6 +24,18 @@ pipeline {
 		        bat "docker build -t %IMAGE_NAME%:%IMAGE_TAG% ."
 		    }
 		}
+		
+		stage('Debug Minikube') {
+			    steps {
+			        bat 'whoami'
+			        bat 'echo USERPROFILE=%USERPROFILE%'
+			        bat 'echo HOME=%HOME%'
+			        bat 'where minikube'
+			        bat 'minikube profile list'
+			        bat 'minikube status'
+			        bat 'kubectl config current-context'
+			    }
+			}
 		
 		stage('Load Image into Minikube') {
 		    steps {
