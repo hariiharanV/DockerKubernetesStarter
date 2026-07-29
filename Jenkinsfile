@@ -5,6 +5,10 @@ pipeline {
         IMAGE_NAME = "hello-k8s"
         IMAGE_TAG = "v1"
     }
+    
+     tools {
+        maven 'Maven3'
+    }
 
     stages {
 
@@ -22,13 +26,13 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t %IMAGE_NAME%:%IMAGE_TAG% .'
+               sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
             }
         }
 
         stage('Load Image into Minikube') {
             steps {
-                sh 'minikube image load %IMAGE_NAME%:%IMAGE_TAG%'
+               sh "minikube image load ${IMAGE_NAME}:${IMAGE_TAG}"
             }
         }
 
